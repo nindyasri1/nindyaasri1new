@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Laporan Keuangan RT Online</title>
+  <style>
+    body { font-family: Arial, sans-serif; background:#f3f4f6; padding:20px }
+    h1 { text-align:center; margin-bottom:20px }
+    .card { background:#fff; padding:20px; border-radius:10px; max-width:700px; margin:auto }
+    label { font-weight:bold }
+    input, button { width:100%; padding:10px; margin:6px 0 }
+    button { background:#16a34a; color:#fff; border:none; border-radius:6px; cursor:pointer }
+    button:hover { background:#15803d }
+  </style>
+</head>
+<body>
+
+<h1>Laporan Keuangan RT Online</h1>
+
+<div class="card">
+  <form id="formRT">
+    <label>Tanggal</label>
+    <input type="date" name="tanggal" required />
+
+    <label>Keterangan</label>
+    <input type="text" name="keterangan" required />
+
+    <label>Uang Masuk</label>
+    <input type="number" name="masuk" />
+
+    <label>Uang Keluar</label>
+    <input type="number" name="keluar" />
+
+    <button type="submit">Simpan ke Spreadsheet</button>
+  </form>
+</div>
+
+<script>
+const scriptURL = 'ISI_URL_GOOGLE_APPS_SCRIPT';
+const form = document.getElementById('formRT');
+
+form.addEventListener('submit', e => {
+  e.preventDefault();
+  fetch(scriptURL, { method: 'POST', body: new FormData(form) })
+    .then(() => { alert('Data berhasil disimpan'); form.reset(); })
+    .catch(err => alert('Gagal menyimpan data'));
+});
+</script>
+
+</body>
+</html>
