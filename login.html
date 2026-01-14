@@ -17,7 +17,7 @@ body{font-family:Arial;display:flex;justify-content:center;align-items:center;he
 </div>
 <script>
 function login(){
-fetch('ISI_URL_WEB_APP',{
+fetch('https://script.google.com/macros/s/AKfycbxqV0mHgG9Q1NVk5hKajsfN8CsTmgniNueS2ykBySGHhnGof0qd2Y5VJcdG8G5oCQRU/exec',{
 method:'POST',
 headers:{'Content-Type':'application/x-www-form-urlencoded'},
 body:'action=login&password='+document.getElementById('pw').value
@@ -34,4 +34,5 @@ document.getElementById('msg').innerText='Password salah';
 }
 </script>
 </body>
+
 </html>
