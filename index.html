@@ -20,6 +20,12 @@
 <p id="notif"></p>
 
 <script>
+fetch(URL, {
+  method: "POST",
+  body: new FormData(form),
+  mode: "no-cors"
+})
+
 const URL = "https://script.google.com/macros/s/AKfycbwQzWnB7R4o3EEKxSbK2hZpir_1zJU4dwt8uSITtS9JiTSVaxcp6VDo3XKbh91BvVuC/exec";
 const form = document.getElementById("form");
 const notif = document.getElementById("notif");
@@ -43,10 +49,12 @@ form.addEventListener("submit", e => {
     notif.innerText = "❌ Koneksi gagal";
   });
 });
+
 </script>
 
 </body>
 </html>
+
 
 
 
