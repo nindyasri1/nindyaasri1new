@@ -1,87 +1,32 @@
-
-
-
 <!DOCTYPE html>
 <html lang="id">
-  
 <head>
-  <meta charset="UTF-8">
-  <title>Laporan Keuangan RT Online</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <style>
-    body { font-family: Arial; background:#f3f4f6; padding:20px }
-    .card { background:#fff; padding:20px; max-width:600px; margin:auto; border-radius:10px }
-    h2 { text-align:center }
-    input, button { width:100%; padding:10px; margin:6px 0 }
-    button { background:#16a34a; color:white; border:none; border-radius:6px }
-    #notif { margin-top:10px; font-weight:bold; text-align:center }
-  </style>
+<meta charset="UTF-8">
+<title>Laporan Keuangan RT NEW</title>
+<style>
+body{font-family:Arial;margin:20px}
+table{width:100%;border-collapse:collapse}
+th,td{border:1px solid #ccc;padding:8px}
+th{background:#eee}
+</style>
 </head>
-
 <body>
-
-<h2>Laporan Keuangan Nindya 1</h2>
-
-<form id="formKeuangan" method="post">
-  
-  <input type="date" name="tanggal" required>
-  <input type="text" name="keterangan" required>
-  <input type="number" name="masuk">
-  <input type="number" name="keluar">
-
-  <!-- 🔥 tombol HARUS di dalam form -->
-  <button type="submit">Simpan ke Spreadsheet</button>
-</form>
-
-<div id="notif"></div>
-
+<h2>Laporan Keuangan RT NEW</h2>
+<table id="data">
+<thead><tr><th>Tanggal</th><th>Jenis</th><th>Keterangan</th><th>Jumlah</th></tr></thead>
+<tbody></tbody>
+</table>
 <script>
-alert("JS AKTIF"); // DEBUG
-
-const form = document.getElementById("formKeuangan");
-const notif = document.getElementById("notif");
-
-form.addEventListener("submit", function(e){
-  e.preventDefault();
-  alert("SUBMIT TERPANGGIL"); // DEBUG
-
-  notif.innerHTML = "⏳ Menyimpan data...";
-
-  const formData = new FormData(form);
-
-  fetch("https://script.google.com/macros/s/AKfycbx3rJ5FG_PAHLRfZf_nO3lvoZuwuMJDuOjtHe1kec1EbJxKIiark0jm1VsCdcEtobPX/exec", {
-    method: "POST",
-    body: formData
-  })
-  .then(r => r.text())
-  .then(r => {
-    notif.innerHTML =
-      r.trim() === "OK"
-        ? "✅ Data berhasil disimpan"
-        : "❌ Gagal menyimpan data: " + r;
-  })
-  .catch(err => {
-    console.error(err);
-    notif.innerHTML = "❌ Koneksi gagal";
-  });
+fetch('https://script.google.com/macros/s/AKfycbxqV0mHgG9Q1NVk5hKajsfN8CsTmgniNueS2ykBySGHhnGof0qd2Y5VJcdG8G5oCQRU/exec')
+.then(r=>r.json())
+.then(d=>{
+const tb=document.querySelector('tbody');
+d.slice(1).forEach(r=>{
+const tr=document.createElement('tr');
+r.forEach(c=>{const td=document.createElement('td');td.textContent=c;tr.appendChild(td)});
+tb.appendChild(tr);
+})
 });
 </script>
-
-
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
