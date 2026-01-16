@@ -44,9 +44,16 @@ body{
   text-decoration:none;
   border-radius:10px;
   margin-bottom:6px;
+  transition: background .25s ease, transform .25s ease;
 }
 .sidebar ul li a:hover{
   background:#166534;
+   background:#166534;
+  transform: translateX(4px);
+}
+  .sidebar ul li a.active{
+  background:#22c55e;
+  font-weight:600;
 }
 .sidebar.collapsed .text{
   display:none;
@@ -81,10 +88,12 @@ body{
   margin:auto;
 }
 .card{
-  background:#fff;
-  border-radius:18px;
-  padding:28px;
-  box-shadow:0 20px 40px rgba(0,0,0,.15);
+  transition: transform .3s ease, box-shadow .3s ease;
+}
+
+.card:hover{
+  transform: translateY(-4px);
+  box-shadow:0 25px 45px rgba(0,0,0,.18);
 }
 h3,h4{
   text-align:center;
@@ -163,11 +172,12 @@ button.simpan:hover{
 }
 
 .hero-img{
-  width:100%;
-  border-radius:16px;
-  box-shadow:0 12px 30px rgba(0,0,0,.2);
+  transition: transform .4s ease;
 }
 
+.hero-img:hover{
+  transform: scale(1.03);
+}
 </style>
 </head>
 
@@ -181,7 +191,7 @@ if(sessionStorage.getItem('admin')!=='true'){
 
 <!-- SIDEBAR -->
 <div class="sidebar" id="sidebar">
-  <div class="logo">RT 01</div>
+  <div class="logo">MENU</div>
   <button class="toggle-btn" onclick="toggleSidebar()">☰</button>
   <ul>
     <li>
@@ -197,6 +207,7 @@ if(sessionStorage.getItem('admin')!=='true'){
 </li>
     <li><a href="#"><span>📊</span><span class="text">Laporan</span></a></li>
     <li><a href="#"><span>👥</span><span class="text">Data Warga</span></a></li>
+    <li><a href="#"><span>👥</span><span class="text">Lapor & Saran</span></a></li>
     <li><a href="#" onclick="logout()"><span>🚪</span><span class="text">Logout</span></a></li>
   </ul>
 </div>
@@ -306,15 +317,22 @@ function showPage(page){
   document.querySelectorAll('.page').forEach(p=>{
     p.classList.remove('active');
   });
+
   document.getElementById('page-' + page).classList.add('active');
+
+  // highlight menu aktif
+  document.querySelectorAll('.sidebar a').forEach(a=>{
+    a.classList.remove('active');
+  });
+  event.target.closest('a').classList.add('active');
 }
 
-/* default tampil dashboard */
 showPage('dashboard');
 </script>
 
 </body>
 </html>
+
 
 
 
