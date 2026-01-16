@@ -178,6 +178,92 @@ button.simpan:hover{
 .hero-img:hover{
   transform: scale(1.03);
 }
+/* MODAL FORM LAPORAN */
+.modal{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.45);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:2000;
+}
+
+.modal-box{
+  background:#fff;
+  width:90%;
+  max-width:380px;
+  border-radius:18px;
+  padding:22px;
+  animation:zoom .25s ease;
+}
+
+@keyframes zoom{
+  from{transform:scale(.9);opacity:0}
+  to{transform:scale(1);opacity:1}
+}
+
+.modal-box h3{
+  text-align:center;
+  color:#065f46;
+}
+
+.modal-box p{
+  text-align:center;
+  font-size:14px;
+  margin-bottom:12px;
+  color:#374151;
+}
+
+.modal-box label{
+  font-size:14px;
+  font-weight:600;
+  margin-top:10px;
+  display:block;
+}
+
+.modal-box input,
+.modal-box textarea{
+  width:100%;
+  margin-top:6px;
+  padding:10px;
+  border-radius:10px;
+  border:1px solid #d1d5db;
+}
+
+.modal-btn{
+  display:flex;
+  gap:10px;
+  margin-top:14px;
+}
+
+.btn-cancel{
+  flex:1;
+  background:#e5e7eb;
+  border:none;
+  padding:10px;
+  border-radius:10px;
+  cursor:pointer;
+}
+
+.btn-send{
+  flex:1;
+  background:#16a34a;
+  color:white;
+  border:none;
+  padding:10px;
+  border-radius:10px;
+  cursor:pointer;
+}
+
+.btn-send:hover{background:#15803d}
+
+#laporMsg{
+  text-align:center;
+  margin-top:10px;
+  font-weight:bold;
+}
+
 </style>
 </head>
 
@@ -207,7 +293,11 @@ if(sessionStorage.getItem('admin')!=='true'){
 </li>
     <li><a href="#"><span>📊</span><span class="text">Laporan</span></a></li>
     <li><a href="#"><span>👥</span><span class="text">Data Warga</span></a></li>
-    <li><a href="#"><span>👥</span><span class="text">Lapor & Saran</span></a></li>
+<li>
+  <a href="#" onclick="openLapor()">
+    📝 <span class="text">Lapor & Saran</span>
+  </a>
+</li>
     <li><a href="#" onclick="logout()"><span>🚪</span><span class="text">Logout</span></a></li>
   </ul>
 </div>
@@ -329,9 +419,63 @@ function showPage(page){
 
 showPage('dashboard');
 </script>
+<script>
+  // SCRIPT MENU LAPORAN
+function openLapor(){
+  document.getElementById('laporModal').style.display='flex';
+}
+function closeLapor(){
+  document.getElementById('laporModal').style.display='none';
+}
+
+function kirimLapor(){
+  const msg = document.getElementById('laporMsg');
+  msg.innerText='⏳ Mengirim...';
+
+  fetch('https://script.google.com/macros/s/AKfycbwxl263rf_wXePPx8-4Nabz_6vW_1FxeFfe7MtC8mleDq_6AbEP1wPLkh2XIgdprBJPSg/exec', {
+    method:'POST',
+    body:new URLSearchParams({
+      nama:document.getElementById('laporNama').value,
+      pesan:document.getElementById('laporPesan').value,
+      jenis:'Lapor & Saran'
+    })
+  })
+  .then(res=>res.text())
+  .then(()=>{
+    msg.innerText='✅ Terima kasih atas masukannya';
+    document.getElementById('laporNama').value='';
+    document.getElementById('laporPesan').value='';
+    setTimeout(closeLapor,1500);
+  })
+  .catch(()=>{
+    msg.innerText='❌ Gagal mengirim';
+  });
+}
+</script>
+<!-- POPUP LAPOR & SARAN -->
+<div class="modal" id="laporModal">
+  <div class="modal-box">
+    <h3>📝 Lapor & Saran</h3>
+    <p>Sampaikan masukan demi lingkungan yang lebih baik 🌱</p>
+
+    <label>Nama (opsional)</label>
+    <input type="text" id="laporNama" placeholder="Nama Anda">
+
+    <label>Pesan</label>
+    <textarea id="laporPesan" rows="4" placeholder="Tulis laporan / saran..."></textarea>
+
+    <div class="modal-btn">
+      <button class="btn-cancel" onclick="closeLapor()">Batal</button>
+      <button class="btn-send" onclick="kirimLapor()">Kirim</button>
+    </div>
+
+    <div id="laporMsg"></div>
+  </div>
+</div>
 
 </body>
 </html>
+
 
 
 
