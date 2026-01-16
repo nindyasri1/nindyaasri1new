@@ -547,7 +547,7 @@ function kirimLapor(){
   });
 }
  </script>
-   // SCRIPT MENU POPUP LAPORAN 
+
 <script>
 function openLaporan(){
   document.getElementById('laporanModal').style.display='flex';
@@ -557,6 +557,7 @@ function closeLaporan(){
   document.getElementById('laporanModal').style.display='none';
 }
 function loadLaporan(){
+  if(e) e.preventDefault();
   const body = document.getElementById('laporanBody');
   const tglMulai = document.getElementById('filterMulai').value;
   const tglAkhir = document.getElementById('filterAkhir').value;
@@ -658,6 +659,7 @@ function loadLaporan(){
 
 </body>
 </html>
+
 
 
 
