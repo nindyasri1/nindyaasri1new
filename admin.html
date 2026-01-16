@@ -331,6 +331,46 @@ td:last-child{
   font-weight:600;
   color:#065f46;
 }
+/* LAPORAN NEW FILTER */
+.sidebar-filter{
+  margin:8px 6px 14px;
+  padding:10px;
+  border-radius:12px;
+  background:#166534;
+  font-size:12px;
+}
+
+.sidebar-filter small{
+  color:#dcfce7;
+  font-weight:600;
+}
+
+.sidebar-filter input{
+  width:100%;
+  margin-top:6px;
+  padding:6px;
+  border-radius:8px;
+  border:none;
+  font-size:12px;
+}
+
+.sidebar-filter .btn-send{
+  width:100%;
+  margin-top:8px;
+  padding:8px;
+  border-radius:10px;
+  font-size:12px;
+}
+
+.total-box{
+  margin-top:8px;
+  padding:8px;
+  border-radius:10px;
+  background:#f0fdf4;
+  color:#065f46;
+  text-align:center;
+  font-weight:700;
+}
 
 </style>
 </head>
@@ -360,29 +400,29 @@ if(sessionStorage.getItem('admin')!=='true'){
   </a>
 </li>
 <li>
+  <!-- MENU LAPORAN -->
   <a href="#" onclick="openLaporan()">
     📊 <span class="text">Laporan</span>
-    <!-- FILTER -->
-<div style="display:flex; gap:8px; margin:10px 0; flex-wrap:wrap">
-  <input type="date" id="filterMulai">
-  <input type="date" id="filterAkhir">
-  <button type="button" class="btn-send" onclick="loadLaporan(event)">🔍 Filter</button>
-</div>
-
-<!-- TOTAL SALDO -->
-<div style="
-  margin:10px 0;
-  padding:10px;
-  border-radius:12px;
-  background:#f0fdf4;
-  font-weight:700;
-  color:#065f46;
-  text-align:center;">
-  Total Saldo: <span id="totalSaldo">Rp 0</span>
-</div>
-
   </a>
+
+  <!-- FILTER & TOTAL (MENU KIRI) -->
+  <div class="sidebar-filter">
+    <small>📅 Filter Laporan</small>
+
+    <input type="date" id="filterMulai">
+    <input type="date" id="filterAkhir">
+
+    <button type="button" class="btn-send" onclick="loadLaporan()">
+      🔍 Filter
+    </button>
+
+    <div class="total-box">
+      Total Saldo<br>
+      <span id="totalSaldo">Rp 0</span>
+    </div>
+  </div>
 </li>
+
     <li><a href="#"><span>👥</span><span class="text">Data Warga</span></a></li>
 <li>
   <a href="#" onclick="openLapor()">
@@ -659,6 +699,7 @@ function loadLaporan(){
 
 </body>
 </html>
+
 
 
 
