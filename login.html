@@ -102,8 +102,10 @@ body::before{
   <div class="box">
     <h3>Login Warga RT Nindya 1</h3>
 
-    <input type="password" id="pw" placeholder="Password">
-    <button onclick="login()">Login</button>
+   <form onsubmit="login(); return false;">
+  <input type="password" id="pw" placeholder="Password" autofocus>
+  <button type="submit">Login</button>
+</form>
 
     <p id="msg"></p>
 
@@ -115,33 +117,34 @@ body::before{
 
 <script>
 function login(){
-  const password = document.getElementById('pw').value;
+  const pw = document.getElementById('pw').value;
+  const msg = document.getElementById('msg');
 
-  fetch('https://script.google.com/macros/s/AKfycbwxl263rf_wXePPx8-4Nabz_6vW_1FxeFfe7MtC8mleDq_6AbEP1wPLkh2XIgdprBJPSg/exec', {
-    method: 'POST',
-    body: new URLSearchParams({
-      action: 'login',
-      password: password
+  msg.innerText = '⏳ Mengecek...';
+
+  fetch('URL_APPS_SCRIPT', {
+    method:'POST',
+    body:new URLSearchParams({
+      action:'login',
+      password: pw
     })
   })
-  .then(res => res.text())
-  .then(res => {
-    if(res.trim() === 'success'){
+  .then(res=>res.text())
+  .then(res=>{
+    if(res.trim()==='success'){
       sessionStorage.setItem('admin','true');
-      location.href = 'admin.html';
-    } else {
-      document.getElementById('msg').innerText = 'Password salah';
+      location.href='index.html';
+    }else{
+      msg.innerText='❌ Password salah';
     }
-  })
-  .catch(err => {
-    document.getElementById('msg').innerText = 'Koneksi gagal';
-    console.error(err);
   });
 }
 </script>
 
+
 </body>
 </html>
+
 
 
 
