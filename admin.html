@@ -690,7 +690,7 @@ function loadWarga(){
 
   fetch('https://script.google.com/macros/s/AKfycbwxl263rf_wXePPx8-4Nabz_6vW_1FxeFfe7MtC8mleDq_6AbEP1wPLkh2XIgdprBJPSg/exec')
     .then(res=>res.json())
-    .then(data=>{
+    .then(warga=>{
       body.innerHTML='';
       data.slice(1).forEach((r,i)=>{
         body.innerHTML+=`
@@ -700,6 +700,7 @@ function loadWarga(){
             <td>${r[2]}</td>
             <td>${r[3]}</td>
             <td>${r[4]}</td>
+            <td>${r[5]}</td>
           </tr>`;
       });
     });
@@ -789,6 +790,7 @@ function simpanWarga(){
           <th>No Rumah</th>
           <th>No HP</th>
           <th>Status</th>
+          <th>Jumlah Anak</th>
         </tr>
       </thead>
       <tbody id="wargaList"></tbody>
@@ -832,6 +834,7 @@ function simpanWarga(){
 
 </body>
 </html>
+
 
 
 
