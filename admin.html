@@ -824,7 +824,7 @@ function loadGaleri(){
   const list = document.getElementById('galeriList');
   list.innerHTML = '⏳ Memuat...';
 
-  fetch('URL_APPS_SCRIPT?action=galeri')
+  fetch('script.google.com/macros/s/AKfycbwxl263rf_wXePPx8-4Nabz_6vW_1FxeFfe7MtC8mleDq_6AbEP1wPLkh2XIgdprBJPSg/exec?action=galeri')
     .then(res=>res.json())
     .then(data=>{
       list.innerHTML='';
@@ -853,7 +853,7 @@ function uploadFoto(){
 
   const reader = new FileReader();
   reader.onload = function(){
-    fetch('URL_APPS_SCRIPT',{
+    fetch('script.google.com/macros/s/AKfycbwxl263rf_wXePPx8-4Nabz_6vW_1FxeFfe7MtC8mleDq_6AbEP1wPLkh2XIgdprBJPSg/exec',{
       method:'POST',
       body:new URLSearchParams({
         action:'uploadFoto',
@@ -978,6 +978,7 @@ function uploadFoto(){
 
 </body>
 </html>
+
 
 
 
