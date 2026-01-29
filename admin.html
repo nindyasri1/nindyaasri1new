@@ -574,7 +574,7 @@ if(sessionStorage.getItem('admin')!=='true'){
         <button class="simpan" onclick="simpan()">💾 Simpan Data</button>
         
         <div id="msg"></div>
-     <button class="btn-cancel" onclick="closeGaleri()">Tutup</button>
+        <button class="btn-cancel" onclick="tutupInput()">❌ Tutup</button>
       </div>
       <div class="footer">© 2026 — Andy Pram</div>
     </div>
@@ -921,7 +921,11 @@ function uploadFoto(){
   reader.readAsDataURL(file);
 }
 </script>
-
+<script>
+function tutupInput(){
+  showPage('dashboard');
+}
+</script>
 <!-- POPUP LAPOR & SARAN -->
 <div class="modal" id="laporModal">
   <div class="modal-box">
@@ -1044,6 +1048,7 @@ function uploadFoto(){
 </div>
 </body>
 </html>
+
 
 
 
